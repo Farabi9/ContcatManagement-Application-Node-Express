@@ -1,13 +1,16 @@
 const express = require("express");
-const env = require("dotenv").config()
+const dotenv = require("dotenv").config()
 
 
 const app = express();
+app.use(express.json())
+
+app.use('/api/contacts', require('./routes/contactRoutes'));
 
 
+const port = parseInt(process.env.PORT) || 8001;
+// console.log(port);
 
-const port = process.env.PORT || 3000;
-
-app.listen(port, () =>{
-    console.log(`Port is running on server ${port}`)
-})
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
